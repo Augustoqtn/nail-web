@@ -6,9 +6,9 @@ $senha = "pw1234";
 $bdNome = "clientes";
 $bdPorta = "3307";
 echo "ansuasj";
-// try {
+try {
     $conn = new PDO("mysql:host=$nomeServidor;port=$bdPorta", $nomeUsuario, $senha);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);//
-// } catch (PDOException $e) {
-//     echo 'ERROR: ' . $e->getMessage();
-// }
+} catch (PDOException $e) {
+    echo 'ERROR: ' . $e->getMessage();
+}
