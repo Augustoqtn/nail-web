@@ -2,13 +2,12 @@
 
 $nomeServidor = "localhost";
 $nomeUsuario = "Augusto";
-$senha = "senha";
+$senha = "pw1234";
 $bdNome = "clientes";
-
-$conexao = new PDO("mysql:host=$nomeServidor;dbname=$bdNome", $nomeUsuario, $senha);
+$bdPorta = "3307";
 
 try {
-    $conn = new PDO('mysql:host=localhost;dbname=meuBancoDeDados', $username, $password);
+    $conn = new PDO("mysql:host=$nomeServidor;dbname=$bdNome;port=$bdPorta", $nomeUsuario, $senha);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 } catch (PDOException $e) {
     echo 'ERROR: ' . $e->getMessage();
