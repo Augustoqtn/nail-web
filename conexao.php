@@ -14,6 +14,6 @@ try {
 }
 $stmt = $conn->query("SELECT * FROM  clientes");
 while ($row = $stmt->fetch()) {
-    echo $row["nome"];
+    // echo $row["nome"];
 }
 
