@@ -3,7 +3,6 @@
 include "conexao.php";
 
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,15 +14,23 @@ include "conexao.php";
 </head>
 
 <body>
+    <h1></h1>
     <?php
     $resultadoClientes = $conn->prepare("SELECT * FROM clientes");
     $resultadoClientes->execute();
 
+    echo "<table border=1>";
+
     while ($linhaCliente = $resultadoClientes->fetch(PDO::FETCH_ASSOC)) {
-        echo "nome:" . $linhaCliente["nome"] . "<br>";
-        echo "telefone:" . $linhaCliente["telefone"] . "<br>";
-        echo "cpf:" . $linhaCliente["cpf"] . "<br><hr>";
+
+        "<th>Nome:</th>
+        <th>Telefone:</th>
+        <th>CPF:</th>";
+        echo "<tr><td>$linhaCliente[nome]</td>"
+            . "<td>$linhaCliente[telefone]</td>"
+            . "<td>$linhaCliente[cpf]</td></tr>";
     }
+    echo "</table>";
     ?>
 
 </body>
