@@ -11,7 +11,7 @@ include "conexao.php";
 <title>Document</title>
 </head>
     <body>
-        <h1>tabela</h1>
+        <h1>clientes:</h1>
 
         <?php $resultadoClientes = $conn->prepare("SELECT * FROM clientes");
         $resultadoClientes->execute(); ?>
@@ -25,7 +25,8 @@ include "conexao.php";
             <?php while ($linhaCliente = $resultadoClientes->fetch(PDO::FETCH_ASSOC)) : ?>
             <tr>
                 
-                <td><a href="cliente.php"><?php echo $linhaCliente["nome"] ?></a></td>
+                <td><a href="cliente.php?id=<?php echo $linhaCliente["id"]?>">
+                <?php echo $linhaCliente["nome"] ?></a></td>
                 <td><?php echo $linhaCliente["telefone"] ?></td>
                 <td><?php echo $linhaCliente["cpf"] ?></td>
             </tr>

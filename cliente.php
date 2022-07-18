@@ -1,3 +1,7 @@
+<!-- <?php
+include "conexao.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,8 +11,11 @@
     <title>Document</title>
 </head>
 <body>
-    kandkankdnsd
-    sjaijsiajisj
-    
+
+<?php $resultadoClientes = $conn->prepare("SELECT * FROM clientes");
+        $resultadoClientes->execute(); ?>
+        <?php  ?>
+        <?php var_dump($resultadoClientes); ?>
+
 </body>
-</html>
+</html> -->
