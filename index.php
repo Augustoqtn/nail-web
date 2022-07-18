@@ -23,12 +23,9 @@ include "conexao.php";
 
     while ($linhaCliente = $resultadoClientes->fetch(PDO::FETCH_ASSOC)) {
 
-        "<th>Nome:</th>
-        <th>Telefone:</th>
-        <th>CPF:</th>";
-        echo "<tr><td>$linhaCliente[nome]</td>"
-            . "<td>$linhaCliente[telefone]</td>"
-            . "<td>$linhaCliente[cpf]</td></tr>";
+        echo "<tr><td>{$linhaCliente["nome"]}</td>"
+            . "<td>{$linhaCliente["telefone"]}</td>"
+            . "<td>{$linhaCliente["cpf"]}</td></tr>";
     }
     echo "</table>";
     ?>
