@@ -14,3 +14,8 @@ insert into clientes values (valores);
 -- realiza consulta na tabela
 select * from clientes;
 
+-- adiciona um novo campo na coluna (id)
+alter table clientes add column id int(11) not null auto_increment;
+
+-- adiciona o (id) como chave primaria
+add primary key (id);
