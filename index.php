@@ -1,7 +1,5 @@
 <?php
 
-
-
 include "conexao.php";
 
 ?>
@@ -15,17 +13,17 @@ include "conexao.php";
 <title>clientes</title>
 </head>
     <body>
-        <h2>clientes:</h2>
         <?php $resultadoClientes = $conn->prepare("SELECT * FROM clientes");
-        $resultadoClientes->execute(); ?>
+        $resultadoClientes->execute(); ?> 
         <table border=1>
+        <caption><h2>Clientes</h2></caption>
             <tr>
-                <td>nome:</td>
-                <td>telefone:</td>
-                <td>CPF:</td>
+                <th>nome:</th>
+                <th>telefone:</th>
+                <th>CPF:</th>
             </tr>
 
-            <?php while ($linhaCliente = $resultadoClientes->fetch(PDO::FETCH_ASSOC)) : ?>
+            <?php while ($linhaCliente = $resultadoClientes->fetch(PDO::FETCH_ASSOC)) : ?> 
             <tr>
                 
                 <td><a href="cliente.php?id=<?php echo $linhaCliente["id"]?>">
@@ -33,7 +31,7 @@ include "conexao.php";
                 <td><?php echo $linhaCliente["telefone"] ?></td>
                 <td><?php echo $linhaCliente["cpf"] ?></td>
             </tr>
-            <?php endwhile ?>
+            <?php endwhile ?> 
         </table>
     </body>
 
