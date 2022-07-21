@@ -1,18 +1,11 @@
 <?php
 
 include "conexao.php";
+include "./templates/cabecalho.php";
+
 
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>clientes</title>
-</head>
-    <body>
         <?php $resultadoClientes = $conn->prepare("SELECT * FROM clientes");
         $resultadoClientes->execute(); ?> 
         <table border=1>
@@ -33,6 +26,4 @@ include "conexao.php";
             </tr>
             <?php endwhile ?> 
         </table>
-    </body>
-
-</html>
+        <?php include "./templates/rodape.php";?>
