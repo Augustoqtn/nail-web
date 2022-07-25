@@ -17,17 +17,17 @@ if (($resultadoCliente)and($resultadoCliente->rowCount() != 0)) {
 }   
 
 //recebe dados do formulario
-
 $dadosCliente = filter_input_array(INPUT_POST, FILTER_DEFAULT);
 
 // verifica se usuario clicou no botão
 if (!empty($dadosCliente["editar-cliente"])) {
-    $emptyInput = false;
+    $inputVazio = false;
     $dadosCliente = array_map("trim",$dadosCliente);
     if(in_array("", $dadosCliente)) {
-        $emptyInput = true;
+        $inputVazio = true;
+        echo "ERRO: Nescessário preencher todos os campos";
     }
-    if (!$emptyInput) {
+    if (!$inputVazio) {
         $queryEditaCliente = ("UPDATE clientes SET nome=:nome, telefone=:telefone, cpf=:cpf WHERE id=:id");
         $editaCliente = $conn->prepare($queryEditaCliente);
         $editaCliente->bindParam(":nome", $dadosCliente["nome"], PDO::PARAM_STR);
@@ -35,43 +35,37 @@ if (!empty($dadosCliente["editar-cliente"])) {
         $editaCliente->bindParam(":cpf", $dadosCliente["cpf"], PDO::PARAM_STR);
         $editaCliente->bindParam(":id", $id, PDO::PARAM_INT);
         if ($editaCliente->execute()) {
-            echo "Cliente editado com sucesso!";
             header("location:index.php");
-        } else {
-            echo "cliente não cadastrado";
+            echo "Cliente editado com sucesso!";
         }
 
     }
 }
-
 ?>
-
 <form id="editar-cliente" method="POST" action="">
-    <label>nome:</label><br>
-    <input type="text" id="nome" name="nome" placeholder="Nome completo" value="<?php 
+    <br><input type="text" id="nome" name="nome" placeholder="Nome completo" value="<?php 
 if (isset($dadosCliente["nome"])) {
     echo $dadosCliente["nome"];
 } elseif (isset($linhaCLiente["nome"])) {
     echo $linhaCLiente["nome"];
     }
-    ?>"  required><br>
+    ?>"><br>
 
-    <label>telefone:</label><br>
-    <input type="text" id="telefone" name="telefone" placeholder="Nome completo" value="<?php 
+    <br><input type="text" id="telefone" name="telefone" placeholder="telefone" value="<?php 
 if (isset($dadosCliente["telefone"])) {
     echo $dadosCliente["telefone"];
 } elseif (isset($linhaCLiente["telefone"])) {
     echo $linhaCLiente["telefone"];
     }
-    ?>"  required><br>
+    ?>"><br>
     
-    <label>cpf</label><br>
-    <input type="text" id="cpf" name="cpf" placeholder="Nome completo" value="<?php 
+    <br><input type="text" id="cpf" name="cpf" placeholder="cpf" value="<?php 
 if (isset($dadosCliente["cpf"])) {
     echo $dadosCliente["cpf"];
 } elseif (isset($linhaCLiente["cpf"])) {
     echo $linhaCLiente["cpf"];
     }
-    ?>"  required><br>
-    <input type="submit" value="Salvar" name="editar-cliente">
+    ?>"><br>
+    <br><input type="submit" value="Salvar" name="editar-cliente"></br>
 </form>
+<?php include "./templates/rodape.php";?>

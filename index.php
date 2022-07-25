@@ -25,4 +25,7 @@ $resultadoClientes->execute(); ?>
     </tr>
     <?php endwhile ?> 
 </table>
+<a href="cadastrar-cliente.php">
+    <br><input type="button" value="novo cliente">
+</a>
 <?php include "./templates/rodape.php";?>
