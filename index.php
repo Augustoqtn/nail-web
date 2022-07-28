@@ -1,6 +1,7 @@
 <?php
 
 include "conexao.php";
+$tituloPagina = "Todos clientes";
 include "./templates/cabecalho.php";
 
 
@@ -25,4 +26,7 @@ $resultadoClientes->execute(); ?>
     </tr>
     <?php endwhile ?> 
 </table>
+<a href="cadastrar-cliente.php">
+    <br><input type="button" value="novo cliente">
+</a>
 <?php include "./templates/rodape.php";?>

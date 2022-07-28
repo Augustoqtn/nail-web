@@ -27,7 +27,7 @@ $linhaCliente = $resultadoCliente->fetch(PDO::FETCH_ASSOC);?>
 </tr>
 </table>
 <a href="index.php">
-    <input type="button" value="voltar">
+    <br><input type="button" value="voltar">
 </a>
 <a href="editar-cliente.php?id=<?php echo $linhaCliente["id"]?>">
     <input type="button" value="editar">
