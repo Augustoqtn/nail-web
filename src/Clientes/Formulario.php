@@ -6,7 +6,7 @@ class Formulario
 {
     
     private \PDO $conn;
-    private int $id;
+    private ?int $id;
 
     private array $dados = [
         'nome' => null,
@@ -14,7 +14,7 @@ class Formulario
         'telefone' => null,
     ];
 
-    public function __construct(\PDO $pdo, int $id = null) 
+    public function __construct(\PDO $pdo, ?int $id = null) 
     {
         $this->conn = $pdo;
         $this->id = $id;
@@ -36,17 +36,17 @@ class Formulario
         $this->dados["telefone"] = $dados["telefone"];
     }
 
-    public function getNome() : string
+    public function getNome() : ?string
     {
         return $this->dados['nome'];
     }
 
-    public function getCpf() : string
+    public function getCpf() : ?string
     {
         return $this->dados['cpf'];
     }
 
-    public function getTelefone() : string
+    public function getTelefone() : ?string
     {
         return $this->dados['telefone'];
     }
@@ -73,9 +73,14 @@ class Formulario
     public function salvar(): void
     {
         $params = $this->dados;
-        $params["id"] = $this->id;
 
-        $sql = "UPDATE clientes SET nome = :nome, cpf = :cpf, telefone = :telefone WHERE id = :id";
+        if ($this->id) {
+            $params["id"] = $this->id;
+            $sql = "UPDATE clientes SET nome = :nome, cpf = :cpf, telefone = :telefone WHERE id = :id";
+        } else {
+            $sql = "INSERT INTO clientes (nome, cpf, telefone) VALUES (:nome, :cpf, :telefone)";
+        }
+
         $stmt = $this->conn->prepare($sql);
         $stmt->execute($params);
     }

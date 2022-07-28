@@ -1,62 +1,30 @@
 <?php
 include "conexao.php";
 $tituloPagina = "novo(a) cliente";
-include "./templates/cabecalho.php";
-?>
+require_once "./src/Clientes/Formulario.php";
 
-<?php
-//recebe dados do formulario
-$dadosCliente = filter_input_array(INPUT_POST, FILTER_DEFAULT);
+$form = new \Clientes\Formulario($conn);
 
-// verifica se usuario clicou no botão
-if (!empty($dadosCliente["cadCliente"])) {
-    $inputVazio = false;
-    $dadosCliente = array_map("trim", $dadosCliente);
-    if (in_array("", $dadosCliente)) {
-        $inputVazio = true;
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $form->definirDados($_POST);
+
+    if ($form->valido()) {
+        header("Location: /");
+        $form->salvar();
+        exit();
+    } else {
         echo "ERRO: Nescessário preencher todos os campos";
     }
-    if (!$inputVazio) {
-        $queryNovoCliente = "INSERT INTO clientes (nome, telefone, cpf) VALUES (:nome, :telefone, :cpf)";
-        $cadastraCliente = $conn->prepare($queryNovoCliente);
-        $cadastraCliente->bindParam(":nome", $dadosCliente["nome"], PDO::PARAM_STR);
-        $cadastraCliente->bindParam(":telefone", $dadosCliente["telefone"], PDO::PARAM_STR);
-        $cadastraCliente->bindParam(":cpf", $dadosCliente["cpf"], PDO::PARAM_STR);
-        $cadastraCliente->execute();
-        if ($cadastraCliente->rowCount()) {
-            echo "Cliente cadastrado com sucesso!<br>";
-            unset($dadosCliente);
-        } else {
-            echo "ERRO: Cliente não cadastrado.<br>";
-        }
-    }
-    
 }
+
+include "./templates/cabecalho.php";
 ?>
+<form id="editar-cliente" method="POST" action="">
+    <br><input type="text" id="nome" name="nome" placeholder="Nome completo" value="<?php echo $form->getNome() ?>"><br>
 
-
-<form name="cadCliente" method="POST" action="">
-
-    <br><input type="text" name="nome" id="nome" value="<?php
-    if (isset($dadosCliente["nome"])) {
-        echo $dadosCliente["nome"];
-        } 
-        ?>"placeholder="nome do cliente"></br>
-
-    <br><input type="text" name="telefone" id="telefone"value="<?php
-    if (isset($dadosCliente["telefone"])) {
-        echo $dadosCliente["telefone"];
-        } 
-        ?>" placeholder="telefone do cliente"></br>
-
-    <br><input type="text" name="cpf" id="cpf" value="<?php
-    if (isset($dadosCliente["cpf"])) {
-        echo $dadosCliente["cpf"];
-        } 
-        ?>" placeholder="CPF do cliente"></br>
-
-    <br><input type="submit" name="cadCliente" value="salvar"></br> 
+    <br><input type="text" id="telefone" name="telefone" placeholder="telefone" value="<?php echo $form->getTelefone() ?>"><br>
     
+    <br><input type="text" id="cpf" name="cpf" placeholder="cpf" value="<?php echo $form->getCpf() ?>"><br>
+    <br><input type="submit" value="Salvar" name="editar-cliente"></br>
 </form>
-
-<?php include "./templates/rodape.php"; ?>  
+<?php include "./templates/rodape.php";?>
