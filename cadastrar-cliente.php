@@ -17,7 +17,7 @@ if (!empty($dadosCliente["cadCliente"])) {
         echo "ERRO: Nescessário preencher todos os campos";
     }
     if (!$inputVazio) {
-        $queryNovoCliente = ("INSERT INTO clientes (nome, telefone, cpf) VALUES (:nome, :telefone, :cpf)");
+        $queryNovoCliente = "INSERT INTO clientes (nome, telefone, cpf) VALUES (:nome, :telefone, :cpf)";
         $cadastraCliente = $conn->prepare($queryNovoCliente);
         $cadastraCliente->bindParam(":nome", $dadosCliente["nome"], PDO::PARAM_STR);
         $cadastraCliente->bindParam(":telefone", $dadosCliente["telefone"], PDO::PARAM_STR);

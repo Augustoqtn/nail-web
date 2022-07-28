@@ -6,7 +6,7 @@ include "./templates/cabecalho.php";
 
 $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
 
-$queryCliente = ("SELECT id, nome, telefone, cpf FROM clientes WHERE id = $id LIMIT 1");
+$queryCliente = "SELECT id, nome, telefone, cpf FROM clientes WHERE id = $id LIMIT 1";
 $resultadoCliente = $conn->prepare($queryCliente);
 $resultadoCliente->execute();
 
@@ -29,7 +29,7 @@ if (!empty($dadosCliente["editar-cliente"])) {
         echo "ERRO: Nescessário preencher todos os campos";
     }
     if (!$inputVazio) {
-        $queryEditaCliente = ("UPDATE clientes SET nome=:nome, telefone=:telefone, cpf=:cpf WHERE id=:id");
+        $queryEditaCliente = "UPDATE clientes SET nome=:nome, telefone=:telefone, cpf=:cpf WHERE id=:id";
         $editaCliente = $conn->prepare($queryEditaCliente);
         $editaCliente->bindParam(":nome", $dadosCliente["nome"], PDO::PARAM_STR);
         $editaCliente->bindParam(":telefone", $dadosCliente["telefone"], PDO::PARAM_STR);
