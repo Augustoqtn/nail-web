@@ -1,6 +1,7 @@
 <?php
 
 include "conexao.php";
+$tituloPagina = "Todos clientes";
 include "./templates/cabecalho.php";
 
 

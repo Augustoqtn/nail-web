@@ -1,6 +1,7 @@
 <?php
 ob_start();
 include "conexao.php";
+$tituloPagina = "Editar cliente";
 include "./templates/cabecalho.php";
 
 $id = filter_input(INPUT_GET, "id", FILTER_SANITIZE_NUMBER_INT);
