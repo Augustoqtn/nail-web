@@ -6,7 +6,7 @@ class Formulario
 {
     
     private \PDO $conn;
-    private int $id;
+    private ?int $id;
 
     private array $dados = [
         'nome' => null,
@@ -78,5 +78,14 @@ class Formulario
         $sql = "UPDATE clientes SET nome = :nome, cpf = :cpf, telefone = :telefone WHERE id = :id";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute($params);
+    }
+
+    public function criaNovoCliente()
+    {
+        $sql = "INSERT INTO clientes (nome, telefone, cpf) VALUES (:nome, :telefone, :cpf)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute(['id' => $this->id]);
+        $result = $stmt->fetch();
+        $this->criaNovoCliente($result);
     }
 }
