@@ -80,12 +80,20 @@ class Formulario
         $stmt->execute($params);
     }
 
-    public function criaNovoCliente()
+    public function salvarNovoCliente(): void
     {
-        $sql = "INSERT INTO clientes (nome, telefone, cpf) VALUES (:nome, :telefone, :cpf)";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute(['id' => $this->id]);
-        $result = $stmt->fetch();
-        $this->criaNovoCliente($result);
+        $params = $this->dados;
+        $queryNovoCliente = "INSERT INTO clientes (nome, telefone, cpf) VALUES (:nome, :telefone, :cpf)";
+        $stmt = $this->conn->prepare($queryNovoCliente);
+        $stmt->execute($params);
+
     }
+    // public function criaNovoCliente()
+    // {
+    //     $sql = "INSERT INTO clientes (nome, telefone, cpf) VALUES (:nome, :telefone, :cpf)";
+    //     $stmt = $this->conn->prepare($sql);
+    //     $stmt->execute(['id' => $this->id]);
+    //     $result = $stmt->fetch();
+    //     $this->criaNovoCliente($result);
+    // }
 }
