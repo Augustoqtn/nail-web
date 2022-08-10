@@ -32,4 +32,7 @@ $linhaCliente = $resultadoCliente->fetch(PDO::FETCH_ASSOC);?>
 <a href="editar-cliente.php?id=<?php echo $linhaCliente["id"]?>">
     <input type="button" value="editar">
 </a>
+<a href="excluir-cliente.php?id=<?php echo $linhaCliente["id"]?>">
+    <input type="button" value="excluir cliente">
+</a>
 <?php include "./templates/rodape.php"; ?>

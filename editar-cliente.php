@@ -1,19 +1,19 @@
 <?php
 ob_start();
+use Clientes\Formulario;
 include "conexao.php";
 $tituloPagina = "Editar cliente";
 include "./templates/cabecalho.php";
 require_once "./src/Clientes/Formulario.php";
 
-$form = new \Clientes\Formulario($conn, $_GET['id']);
+$form = new Formulario($conn, $_GET['id']);
 $form->carregarDoBancoDeDados();
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $form->definirDados($_POST);
-
     if ($form->valido()) {
-        $form->salvar();
+        $form->salvarCliente();
         header("Location: /");
         exit();
     } else {

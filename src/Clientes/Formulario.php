@@ -70,7 +70,7 @@ class Formulario
         return $valido;
     }
 
-    public function salvar(): void
+    public function salvarCliente(): void
     {
         $params = $this->dados;
         $params["id"] = $this->id;
@@ -88,12 +88,13 @@ class Formulario
         $stmt->execute($params);
 
     }
-    // public function criaNovoCliente()
-    // {
-    //     $sql = "INSERT INTO clientes (nome, telefone, cpf) VALUES (:nome, :telefone, :cpf)";
-    //     $stmt = $this->conn->prepare($sql);
-    //     $stmt->execute(['id' => $this->id]);
-    //     $result = $stmt->fetch();
-    //     $this->criaNovoCliente($result);
-    // }
+
+    public function excluirCliente(): void
+    {
+        $params = $this->dados;
+        $params["id"] = $this->id;
+        $queryExcluirCliente = "DELETE FROM clientes WHERE id = :id";
+        $stmt = $this->conn->prepare($queryExcluirCliente);
+        $stmt->execute($params);
+    }
 }
