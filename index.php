@@ -4,10 +4,9 @@ include "conexao.php";
 $tituloPagina = "Todos clientes";
 include "./templates/cabecalho.php";
 
-
-?>
-<?php $resultadoClientes = $conn->prepare("SELECT * FROM clientes");
-$resultadoClientes->execute(); ?> 
+$resultadoClientes = $conn->prepare("SELECT * FROM clientes");
+$resultadoClientes->execute(); 
+?> 
 <table border=1>
 <caption><h2>Clientes</h2></caption>
     <tr>
