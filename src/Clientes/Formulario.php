@@ -36,17 +36,17 @@ class Formulario
         $this->dados["telefone"] = $dados["telefone"];
     }
 
-    public function getNome() : string
+    public function getNome() : ?string
     {
         return $this->dados['nome'];
     }
 
-    public function getCpf() : string
+    public function getCpf() : ?string
     {
         return $this->dados['cpf'];
     }
 
-    public function getTelefone() : string
+    public function getTelefone() : ?string
     {
         return $this->dados['telefone'];
     }
@@ -91,7 +91,7 @@ class Formulario
 
     public function excluirCliente(): void
     {
-        $params = $this->dados;
+        $params = [];
         $params["id"] = $this->id;
         $queryExcluirCliente = "DELETE FROM clientes WHERE id = :id";
         $stmt = $this->conn->prepare($queryExcluirCliente);
