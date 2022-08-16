@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 
 <form name="excluir-cliente" method="POST" action="excluir-cliente.php?id=<?php echo $cliente["id"] ?>">
 
-    <br><input type="submit" value="excluir" placeholder="<?php echo $cliente["id"] ?>"></br>
+    <br><input type="submit" value="excluir"></br>
 
 </form>
 
