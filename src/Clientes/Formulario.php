@@ -2,11 +2,12 @@
 
 namespace Clientes;
 
-class Formulario
+class Formulario 
 {
-    
+
     private \PDO $conn;
     private ?int $id;
+    
 
     private array $dados = [
         'nome' => null,
@@ -14,13 +15,17 @@ class Formulario
         'telefone' => null,
     ];
 
-    public function __construct(\PDO $pdo, int $id = null) 
+    // public function cliente() {
+    //     $cliente = new Clientes(C);
+    // }
+
+    public function __construct(\PDO $pdo, int $id = null)
     {
         $this->conn = $pdo;
         $this->id = $id;
     }
 
-    public function carregarDoBancoDeDados() 
+    public function carregarDoBancoDeDados()
     {
         $sql =  "SELECT id, nome, telefone, cpf FROM clientes WHERE id = :id";
         $stmt = $this->conn->prepare($sql);
@@ -36,17 +41,17 @@ class Formulario
         $this->dados["telefone"] = $dados["telefone"];
     }
 
-    public function getNome() : string
+    public function getNome(): ?string
     {
         return $this->dados['nome'];
     }
 
-    public function getCpf() : string
+    public function getCpf(): ?string
     {
         return $this->dados['cpf'];
     }
 
-    public function getTelefone() : string
+    public function getTelefone(): ?string
     {
         return $this->dados['telefone'];
     }
@@ -70,14 +75,18 @@ class Formulario
         return $valido;
     }
 
-    public function salvarCliente(): void
-    {
-        $params = $this->dados;
-        $params["id"] = $this->id;
 
-        $sql = "UPDATE clientes SET nome = :nome, cpf = :cpf, telefone = :telefone WHERE id = :id";
-        $stmt = $this->conn->prepare($sql);
-        $stmt->execute($params);
+    public function salvarCliente()
+    {
+        if ($this->id != null) {
+            $params = $this->dados;
+            $params["id"] = $this->id;
+            $sql = "UPDATE clientes SET nome = :nome, cpf = :cpf, telefone = :telefone WHERE id = :id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute($params);
+        } else {
+            return $this->salvarNovoCliente();
+        }
     }
 
     public function salvarNovoCliente(): void
@@ -86,12 +95,10 @@ class Formulario
         $queryNovoCliente = "INSERT INTO clientes (nome, telefone, cpf) VALUES (:nome, :telefone, :cpf)";
         $stmt = $this->conn->prepare($queryNovoCliente);
         $stmt->execute($params);
-
     }
-
     public function excluirCliente(): void
     {
-        $params = $this->dados;
+        $params = [];
         $params["id"] = $this->id;
         $queryExcluirCliente = "DELETE FROM clientes WHERE id = :id";
         $stmt = $this->conn->prepare($queryExcluirCliente);
