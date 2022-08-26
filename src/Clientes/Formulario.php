@@ -2,17 +2,22 @@
 
 namespace Clientes;
 
-class Formulario
+class Formulario 
 {
 
     private \PDO $conn;
     private ?int $id;
+    
 
     private array $dados = [
         'nome' => null,
         'cpf' => null,
         'telefone' => null,
     ];
+
+    // public function cliente() {
+    //     $cliente = new Clientes(C);
+    // }
 
     public function __construct(\PDO $pdo, int $id = null)
     {

@@ -6,7 +6,6 @@ class Clientes
 {
     private \PDO $conn;
 
-
     public function __construct(\PDO $pdo)
     {
         $this->conn = $pdo;

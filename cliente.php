@@ -14,6 +14,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 }
 
 ?>
+
 <table border=1>
     <caption>
         <h2>Detalhe do Cliente</h2>
@@ -33,14 +34,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 <a href="index.php">
     <br><input type="button" value="voltar">
 </a>
+
 <a href="editar-cliente.php?id=<?php echo $cliente["id"] ?>">
     <input type="button" value="editar">
 </a>
 
 <form name="excluir-cliente" method="POST" action="excluir-cliente.php?id=<?php echo $cliente["id"] ?>">
-
     <br><input type="submit" value="excluir"></br>
-
 </form>
 
 <?php include "./templates/rodape.php"; ?>
